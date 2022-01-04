@@ -72,7 +72,8 @@ body{
 .player {
     box-shadow: 1px 1px 6px 6px #0cc1f873 ;
     margin: 5px auto;
-    width: 18.15em ;
+    width: 90% ;
+    max-width: 375px;
     display: flex ;
     overflow: hidden ;
     font-size: 1.22em ;
