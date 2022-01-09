@@ -27,8 +27,6 @@ let song = playerSongs[count];
 let isPlay = false;
 const pauseIcon = playButton.querySelector("img[alt = 'pause-icon']");
 const playIcon = playButton.querySelector("img[alt = 'play-icon']");
-const progres = player.querySelector(".progres");
-const progresFilled = progres.querySelector(".progres__filled");
 let isMove = false;
 
 // creat functions
@@ -120,7 +118,6 @@ function selectSong() {
 
         if (item != song) {
             item.pause();
-            item.currentTime = 0;
         }
 
     }
@@ -155,41 +152,7 @@ function playSong() {
 
 }
 
-function progresUpdate() {
 
-    const progresFilledWidth = (this.currentTime / this.duration) * 100 + "%";
-    progresFilled.style.width = progresFilledWidth;
-
-    if (isPlay && this.duration == this.currentTime) {
-        next();
-    }
-    if (count == sliderContentLength && song.currentTime == song.duration) {
-        playIcon.style.display = "block";
-        pauseIcon.style.display = "";
-        isPlay = false;
-    }
-}
-
-function scurb(e) {
-
-    // If we use e.offsetX, we have trouble setting the song time, when the mousemove is running
-    const currentTime = ( (e.clientX - progres.getBoundingClientRect().left) / progres.offsetWidth ) * song.duration;
-    song.currentTime = currentTime;
-
-}
-
-function durationSongs() {
-
-    let min = parseInt(this.duration / 60);
-    if (min < 10) min = "0" + min;
-
-    let sec = parseInt(this.duration % 60);
-    if (sec < 10) sec = "0" + sec;
-    
-    const playerSongTime = `${min}:${sec}`;
-    this.closest(".player__song").querySelector(".player__song-time").append(playerSongTime);
-
-}
 
 
 changeSliderContext();
@@ -212,23 +175,6 @@ playButton.addEventListener("click", () => {
     playSong();
 });
 
-playerSongs.forEach(song => {
-    song.addEventListener("loadeddata" , durationSongs);
-    song.addEventListener("timeupdate" , progresUpdate);
-    
-});
-
-progres.addEventListener("pointerdown", (e) => {
-    scurb(e);
-    isMove = true;
-});
-
-document.addEventListener("pointermove", (e) => {
-    if (isMove) {
-        scurb(e); 
-        song.muted = true;
-    }
-});
 
 document.addEventListener("pointerup", () => {
     isMove = false;
