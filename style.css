@@ -44,7 +44,7 @@ body{
     flex-shrink: 0;
     display: block ;
     object-fit: cover ;
-
+    color: rgb(54, 53, 53);
 }
 
 .list {
@@ -359,7 +359,7 @@ img[alt ="pause-icon"] {
     border-radius: 50% ;
     position: absolute ;
     background-color: #5781bd ;
-    
+
 }
 
 .player__playlist {
